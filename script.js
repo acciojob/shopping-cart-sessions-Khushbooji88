@@ -31,21 +31,15 @@ function renderCart() {
     cartList.appendChild(li);
   });
 }
+document.getElementById("cart-list").addEventListener('click', function(event) {
+  if (event.target.className === 'remove-from-cart-btn') {
+    removeFromCart(parseInt(event.target.getAttribute('data-id')));
+    renderCart();
+  }
+});
 
+// Event listener for 'Clear Cart' button
+document.getElementById("clear-cart-btn").addEventListener('click', function() {
+  clearCart();
+});
 // Remove item from cart
-function removeFromCart(productId) {
-  cart = cart.filter((item) => item.id !== productId); // Remove item from cart
-}
-
-// Clear cart
-function clearCart() {
-  cart = []; // Clear the cart array
-  renderCart(); // Update the cart display
-}
-function clearCart() {
-  cart = []; // Clear the cart array
-}
-
-// Initial render
-renderProducts();
-renderCart();
