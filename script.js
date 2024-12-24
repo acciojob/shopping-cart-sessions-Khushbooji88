@@ -1,6 +1,5 @@
 // This is the boilerplate code given for you
 // You can modify this code
-// Product data
 const products = [
   { id: 1, name: "Product 1", price: 10 },
   { id: 2, name: "Product 2", price: 20 },
@@ -8,6 +7,8 @@ const products = [
   { id: 4, name: "Product 4", price: 40 },
   { id: 5, name: "Product 5", price: 50 },
 ];
+
+let cart = [];
 
 // DOM elements
 const productList = document.getElementById("product-list");
@@ -31,6 +32,36 @@ function renderCart() {
     cartList.appendChild(li);
   });
 }
+
+// Add item to cart
+function addToCart(productId) {
+  const product = products.find((product) => product.id === productId);
+  if (product) {
+    cart.push(product);
+  }
+}
+
+// Remove item from cart
+function removeFromCart(productId) {
+  cart = cart.filter((item) => item.id !== productId); // Remove item from cart
+  renderCart(); // Update the cart display
+}
+
+// Clear cart
+function clearCart() {
+  cart = []; // Clear the cart array
+  renderCart(); // Update the cart display
+}
+
+// Event listener for 'Add to Cart' button
+productList.addEventListener('click', function(event) {
+  if (event.target.className === 'add-to-cart-btn') {
+    addToCart(parseInt(event.target.getAttribute('data-id')));
+    renderCart();
+  }
+});
+
+// Event listener for 'Remove from Cart' button
 document.getElementById("cart-list").addEventListener('click', function(event) {
   if (event.target.className === 'remove-from-cart-btn') {
     removeFromCart(parseInt(event.target.getAttribute('data-id')));
@@ -42,4 +73,6 @@ document.getElementById("cart-list").addEventListener('click', function(event) {
 document.getElementById("clear-cart-btn").addEventListener('click', function() {
   clearCart();
 });
-// Remove item from cart
+
+// Initial render
+renderProducts();
