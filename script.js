@@ -23,25 +23,7 @@ function renderProducts() {
 
 // Render cart list
 function renderCart() {
-	cart.forEach((cart) => {
-    const li = document.createElement("li");
-    li.innerHTML = `${cart.name} - $${cart.price} <button class="add-to-cart-btn" data-id="${cart.id}">Add to Cart</button>`;
-    cartList.appendChild(li);
-  });
-}
-}
-let cart = [];
-// Add item to cart
-function addToCart(productId) {
-	const product = products.find((product) => product.id === productId);
-  if (product) {
-    cart.push(product);
-  }
-}
-
-// Remove item from cart
-function removeFromCart(productId) {
-	const cartList = document.getElementById("cart-list");
+  const cartList = document.getElementById("cart-list");
   cartList.innerHTML = ''; // Clear the cart list first
   cart.forEach((item) => {
     const li = document.createElement("li");
@@ -50,11 +32,16 @@ function removeFromCart(productId) {
   });
 }
 
-// Clear cart
-function clearCart() {
-	cart = cart.filter((item) => item.id !== productId); // Remove item from cart
+// Remove item from cart
+function removeFromCart(productId) {
+  cart = cart.filter((item) => item.id !== productId); // Remove item from cart
 }
 
+// Clear cart
+function clearCart() {
+  cart = []; // Clear the cart array
+  renderCart(); // Update the cart display
+}
 function clearCart() {
   cart = []; // Clear the cart array
 }
