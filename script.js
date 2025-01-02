@@ -7,7 +7,6 @@ const products = [
   { id: 4, name: "Product 4", price: 40 },
   { id: 5, name: "Product 5", price: 50 },
 ];
-
 let cart = [];
 
 // DOM elements
